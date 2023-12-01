@@ -6,6 +6,20 @@
 
 */
 
+/***************************** BEGIN vars *****************************/
+:root
+{
+    /* colors */
+    --nav-bg-lm: #E1C0B7;
+    --nav-btn-lm: #D84A21;
+    --nav-text-lm: #FFFFFF;
+    --quiz-text-lm: #000000;
+    --quiz-bg-lm: #F8EEEB;
+    --nav-bg-dm: #D9D9D9;
+    --nav-btn-dm: #1E0701;
+}
+/****************************** END vars ******************************/
+
 /**************************** BEGIN navbar ****************************/
 .flex-container-nav
 {
@@ -29,7 +43,7 @@
     align-self: center;
     /* line-up text to the same y-axis */
     align-items: baseline;   
-    
+
 }
 /***************************** END navbar *****************************/
 
