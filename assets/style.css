@@ -29,14 +29,21 @@ nav
                 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     /* set background color */
     background-color: var(--nav-bg-lm);
+    /* set size */
+    height: 20%;
+    width: 100%;
+}
+nav > img
+{
+    width: auto;
+    height: auto;
 }
 .flex-container-nav
 {
     /* init as a flex object */
     display: flex;
-    /* set size */
-    height: 20%;
-    width: 100%;
+    /* add padding to the element */
+    padding: 20px;
     /* build flex objects horizontally */
     flex-direction: row;
     /* gives all flex items an equal distance between them */
@@ -70,6 +77,7 @@ nav
     .flex-container-nav
     {
         justify-content:space-around;
+        padding: 10px;
     }
     /* @TODO: push answer and quiz btns to right in small, pre
        stacked screens to the right. Following code fails */
@@ -86,6 +94,7 @@ nav
     {
         /* @TODO: implement drawer instead of stacked nav bar */
         flex-direction:column; 
+        padding: 10px;
     }
     .flex-item-nav
     {
