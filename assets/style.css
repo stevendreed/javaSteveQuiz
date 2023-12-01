@@ -11,11 +11,20 @@
 {
     /* init as a flex object */
     display: flex;
+    /* set size */
+    height: 10%;
+    width: 90%;
     /* build flex objects horizontally */
     flex-direction: row;
     /* wrap elements for future mobile support */
     flex-wrap: wrap;
-    /*  */
-    justify-content: center, space-evenly;
+    /* gives all flex items an equal distance between them */
+    justify-content: space-evenly;
+    /* ensure flex items are aligned to the center */
+    align-self: center;
+    /* line-up text to the same y-axis */
+    align-items: baseline;
+    /* maintain a minimum gap, regardless of how small page gets */
+    gap: 10% 5%;
 }
 /***************************** END navbar *****************************/
