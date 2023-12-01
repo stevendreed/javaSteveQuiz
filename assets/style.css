@@ -1,0 +1,21 @@
+/* 
+    style.css
+
+    includes browser rendering instructions for:
+    [1] navbar (implemented as a flexbox)
+
+*/
+
+/**************************** BEGIN navbar ****************************/
+.flex-container-nav
+{
+    /* init as a flex object */
+    display: flex;
+    /* build flex objects horizontally */
+    flex-direction: row;
+    /* wrap elements for future mobile support */
+    flex-wrap: wrap;
+    /*  */
+    justify-content: center, space-evenly;
+}
+/***************************** END navbar *****************************/
