@@ -12,19 +12,54 @@
     /* init as a flex object */
     display: flex;
     /* set size */
-    height: 10%;
+    height: 20%;
     width: 90%;
     /* build flex objects horizontally */
     flex-direction: row;
-    /* wrap elements for future mobile support */
-    flex-wrap: wrap;
     /* gives all flex items an equal distance between them */
     justify-content: space-evenly;
+    /* wrap elements for future mobile support */
+    flex-wrap: wrap;
+    /* maintain a minimum gap, regardless of how small page gets */
+    gap: 10% 10%;
+}
+.flex-item-nav
+{
     /* ensure flex items are aligned to the center */
     align-self: center;
     /* line-up text to the same y-axis */
-    align-items: baseline;
-    /* maintain a minimum gap, regardless of how small page gets */
-    gap: 10% 5%;
+    align-items: baseline;   
 }
 /***************************** END navbar *****************************/
+
+/**************************** START mobile ****************************/
+
+/* mid-scrns */
+@media all and (max-width:800px)
+{
+    .flex-container-nav
+    {
+        justify-content:space-around;
+    }
+    /* @TODO: push answer and quiz btns to right in small, pre
+       stacked screens to the right. Following code fails */
+    /* .flex-item-nav
+    {
+        align-self: right;
+    } */
+}
+
+/* small/mobile screens */
+@media all and (max-width:500px)
+{
+    .flex-container-nav
+    {
+        /* @TODO: implement drawer instead of stacked nav bar */
+        flex-direction:column; 
+    }
+    .flex-item-nav
+    {
+        align-self: flex-start;
+    }
+}
+/***************************** END mobile *****************************/
