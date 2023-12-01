@@ -15,19 +15,28 @@
     --nav-text-lm: #FFFFFF;
     --quiz-text-lm: #000000;
     --quiz-bg-lm: #F8EEEB;
-    --nav-bg-dm: #D9D9D9;
+    --nav-text-dm: #D9D9D9;
     --nav-btn-dm: #1E0701;
+    --nav-bg-dm: #4A3E3B;
 }
 /****************************** END vars ******************************/
 
 /**************************** BEGIN navbar ****************************/
+nav
+{
+    font-family: 'Oswald', 'Mriya Grotest', 'Celesta', 'Industrial',
+                'Trebuchet MS', 'Lucida Sans Unicode',
+                'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    /* set background color */
+    background-color: var(--nav-bg-lm);
+}
 .flex-container-nav
 {
     /* init as a flex object */
     display: flex;
     /* set size */
     height: 20%;
-    width: 90%;
+    width: 100%;
     /* build flex objects horizontally */
     flex-direction: row;
     /* gives all flex items an equal distance between them */
@@ -36,14 +45,20 @@
     flex-wrap: wrap;
     /* maintain a minimum gap, regardless of how small page gets */
     gap: 10% 10%;
+    
 }
 .flex-item-nav
 {
     /* ensure flex items are aligned to the center */
     align-self: center;
     /* line-up text to the same y-axis */
-    align-items: baseline;   
-
+    align-items: baseline;
+    /* grab bg color from parent */
+    background-color: inherit;  
+}
+#quiz-btn
+{
+    background-color: var(--nav-btn-lm);
 }
 /***************************** END navbar *****************************/
 
