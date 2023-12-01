@@ -24,34 +24,49 @@
 /**************************** BEGIN navbar ****************************/
 nav
 {
-    font-family: 'Oswald', 'Mriya Grotest', 'Celesta', 'Industrial',
-                'Trebuchet MS', 'Lucida Sans Unicode',
-                'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     /* set background color */
     background-color: var(--nav-bg-lm);
     /* set size */
     height: 20%;
     width: 100%;
+    font-family: 'Oswald', 'Mriya Grotest', 'Celesta', 'Industrial',
+                'Trebuchet MS', 'Lucida Sans Unicode',
+                'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    box-shadow: 0px 4px 4px 2px #BBBBBB;
 }
-nav > img
-{
-    width: auto;
-    height: auto;
-}
+    nav > img
+    {
+        width: auto;
+        height: 80px;
+    }
+    nav > button
+    {
+        height: 10%;
+        color: var(--nav-text-lm);
+        padding: 4px 8px;
+        border-radius: 5px;
+        box-shadow: 0px 2px 2px 1px #BBBBBB;
+    }
+    nav > * > a
+    {
+        text-decoration: none;
+        color: inherit;
+    }
 .flex-container-nav
 {
     /* init as a flex object */
     display: flex;
     /* add padding to the element */
-    padding: 20px;
+    padding: 10px;
     /* build flex objects horizontally */
     flex-direction: row;
     /* gives all flex items an equal distance between them */
-    justify-content: space-evenly;
+    justify-content: space-between safe;
     /* wrap elements for future mobile support */
     flex-wrap: wrap;
     /* maintain a minimum gap, regardless of how small page gets */
-    gap: 10% 10%;
+    gap: 36px 36px;
     
 }
 .flex-item-nav
@@ -67,6 +82,10 @@ nav > img
 {
     background-color: var(--nav-btn-lm);
 }
+#navbar-buffer
+{
+    flex-grow: 2;
+}
 /***************************** END navbar *****************************/
 
 /**************************** START mobile ****************************/
@@ -77,7 +96,6 @@ nav > img
     .flex-container-nav
     {
         justify-content:space-around;
-        padding: 10px;
     }
     /* @TODO: push answer and quiz btns to right in small, pre
        stacked screens to the right. Following code fails */
@@ -94,11 +112,14 @@ nav > img
     {
         /* @TODO: implement drawer instead of stacked nav bar */
         flex-direction:column; 
-        padding: 10px;
     }
     .flex-item-nav
     {
         align-self: flex-start;
+    }
+    #navbar-buffer
+    {
+        display: none;
     }
 }
 /***************************** END mobile *****************************/
