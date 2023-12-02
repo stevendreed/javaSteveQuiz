@@ -9,15 +9,15 @@
             name="viewport"
             content="width=device-width, initial-scale=1.0"
         />
-        <title>JavaSteve/about</title>
+        <title>JavaSteve/quiz</title>
         <!-- andy-bell.co reset.css file -->
         <link
             rel="stylesheet"
-            href="./assets/reset.css"
+            href="../assets/reset.css"
         />
         <link
             rel="stylesheet"
-            href="./assets/style.css"
+            href="../assets/style.css"
         />
     </head>
     <body>
@@ -29,7 +29,7 @@
                 class="flex-item-nav"
                 id="logo"
                 id="javasteve-icon"
-                src="./assets/img/javaStevev1.1.png"
+                src="../assets/img/javaStevev1.1.png"
                 alt="JavaSteve Icon">
             </img>
             <button
@@ -46,7 +46,7 @@
                 class="flex-item-nav"
                 id="scores-btn">
                 <a
-                    href="./pages/scores.html">
+                    href="./scores.html">
                     scores
                 </a>
             </button>
@@ -54,7 +54,7 @@
                 class="flex-item-nav"
                 id="about-btn">
                 <a 
-                    href="./index.html">
+                    href="../index.html">
                     about
                 </a>
             </button>
@@ -67,17 +67,56 @@
                 class="flex-item-nav"
                 id="quiz-btn">
                 <a
-                    href="./pages/quiz.html">
+                    href="./quiz.html">
                     quiz
                 </a>
             </button>
         </nav>
-        <!-- about section content -->
-        <section>
+        <!-- quiz section -->
+        <section
+            class="flex-container-quiz"
+            id="quiz-section">
+            <!-- section for duckie + question presentation -->
+            <section
+                class="flex-item-quiz">
+                <div
+                    id="ascii-duck">
+                </div>
+                <div
+                    id="speech-bubble">
+                    <p
+                        id="question-text">
+                    <!-- update inner html here to display answers -->
+                    </p>
+                </div>
 
+            </section>
+            <!-- aside for timer + answer options -->
+            <aside
+                class="flex-item-answers">
+                <div
+                    id="timer">
+                </div>
+                <div
+                    class="answer-slot"
+                    id="01-answer">
+                    [1]
+                </div>
+                <div
+                    class="answer-slot"
+                    id="02-answer">
+                    [2]
+                </div>
+                <div
+                    class="answer-slot"
+                    id="03-answer">
+                    [3]
+                </div>
+            </aside>
         </section>
     </body>
     <script
-        src="./js/app.js">
+        src="../js/app.js"
+        src="../js/questions.js">
     </script>
 </html>
