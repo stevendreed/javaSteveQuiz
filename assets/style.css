@@ -88,6 +88,24 @@ nav
 }
 /***************************** END navbar *****************************/
 
+/***************************** START quiz *****************************/
+
+.flex-container-quiz
+{
+    display: flex;
+    height: 50%;
+    width: 100%;
+    flex-direction: column;
+}
+.flex-item-quiz
+{
+    display: inherit;
+    align-items: start;
+    
+}
+
+/****************************** END quiz ******************************/
+
 /**************************** START mobile ****************************/
 
 /* mid-scrns */

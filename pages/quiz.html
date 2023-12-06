@@ -91,32 +91,51 @@
                 </div>
 
             </section>
-            <!-- aside for timer + answer options -->
+            <div
+                class="flex-item-time"
+                id="timer">
+            </div>
+            <!-- aside for answer options -->
             <aside
-                class="flex-item-answers">
+                class="flex-item-answers">   
                 <div
-                    id="timer">
+                    class="answer-slot"
+                    id="01-option">
+                    <!-- &#9; is a tab character -->
+                    [1]&#9;
+                    <div
+                        id="option">
+                    </div>
                 </div>
                 <div
                     class="answer-slot"
-                    id="01-answer">
-                    [1]
+                    id="02-option">
+                    [2]&#9;
+                    <div
+                        id="option">
+                    </div>
                 </div>
                 <div
                     class="answer-slot"
-                    id="02-answer">
-                    [2]
-                </div>
-                <div
-                    class="answer-slot"
-                    id="03-answer">
-                    [3]
+                    id="03-option">
+                    [3]&#9;
+                    <div
+                        id="option">
+                    </div>
                 </div>
             </aside>
         </section>
     </body>
     <script
-        src="../js/app.js"
+        src="../js/app.js">
+    </script>
+    <!-- note: for dynamic quiz question bank, this will need to -->
+    <!-- be dynamically added, NOT static -->
+    <script
+        type="text/javascript"
+        src="../question_bank/test.js">
+    </script>
+    <script
         src="../js/questions.js">
     </script>
 </html>
