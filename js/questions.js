@@ -38,9 +38,13 @@ const setTime = function()
     )
 }
 
-const setAnsw = function(answerArray)
+const setAnsw = function(answerObj)
 {
-
+    const answerSpace = document.getElementsByClassName('answer-slot');
+    for (let i = 0; i < answerSpace.children.length; i++)
+    {
+        answerSpace.children[i].innerHTML = answerArray[i].option[i];
+    }
 }
 
 // eventListener to begin quiz game 
