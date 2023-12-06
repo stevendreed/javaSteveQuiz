@@ -38,12 +38,19 @@ const setTime = function()
     )
 }
 
+// get random integer value from 0 to n
+const getRand = function(n = 2)
+{
+    return Math.floor(Math.random() * n);
+}
+
 const setAnsw = function(answerObj)
 {
     const answerSpace = document.getElementsByClassName('answer-slot');
-    for (let i = 0; i < answerSpace.children.length; i++)
+    let lotoQ = questions[getRand(questions.length)];
+    for (let i = 0; i < questions.length; i++)
     {
-        answerSpace.children[i].innerHTML = answerArray[i].option[i];
+        answerSpace.children[i].innerHTML = lotoQ.options[i];
     }
 }
 
