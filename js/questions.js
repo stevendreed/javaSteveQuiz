@@ -89,7 +89,8 @@ const setAnsw = function(answerObj)
     for (let i = 0; i < lotoQ.options.length; i++)
     {
         // @TODO: option text for the first one displays before the [1]
-        answerSlot[i].childNodes[i].textContent = lotoQ.options[i];
+        const currSlot = answerSlot[i].childNodes[i];
+        currSlot.textContent = lotoQ.options[i];
     }
 }
 
@@ -108,4 +109,10 @@ window.addEventListener("load", () =>
 {
     setTime(3);
     setAnsw(testQuestions);
+    window.addEventListener('keydown', (event =>
+        {
+            // debugging
+            console.log(`key pressed: ${event.key}`);
+            return event.key;
+        }));
 });
