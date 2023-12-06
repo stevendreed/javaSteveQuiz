@@ -103,16 +103,23 @@ const setAnsw = function(answerObj)
 
 // runtime invocation
 // const testBank = loadJson('../question_bank.test.json');
+const selectOptionKeyboard = function()
+{
+    let keyPress = window.addEventListener('keydown', (event =>
+    {
+        // debugging
+        console.log(`key pressed: ${event.key}`);
+        return event.key;
+    }));
+    if (typeof keyPress === 'number')
+    {
+        document.getElementById(`key-${keyPress}`);
+    }
+}
 
 // getFi();
 window.addEventListener("load", () =>
 {
     setTime(3);
     setAnsw(testQuestions);
-    window.addEventListener('keydown', (event =>
-        {
-            // debugging
-            console.log(`key pressed: ${event.key}`);
-            return event.key;
-        }));
 });
