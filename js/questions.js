@@ -73,6 +73,7 @@ const setAnsw = function(answerObj)
 
     const questions = answerObj.bank;
     const answerSlot = document.getElementsByClassName('answer-slot');
+    const questionSlot = document.getElementById('question-text');
 
     // debugging
     console.log(`answer slots found: ${[...answerSlot]}`);
@@ -83,7 +84,7 @@ const setAnsw = function(answerObj)
     console.log(
         `lottory question output: ${lotoQ.question}
     correct answer: ${lotoQ.options[lotoQ.correctIndex]}`);
-
+    questionSlot.textContent = lotoQ.question;
     // answerSlot[0].childNodes[0].textContent = lotoQ.options[0];
     for (let i = 0; i < lotoQ.options.length; i++)
     {
