@@ -1,8 +1,10 @@
 /*
   questions.js
 */
-const timeCounter = document.getElementsByClassName('timer');
-var timeRemaining = 10; // 100 centiseconds => 10 seconds
+const timeCounter = document.getElementById('timer');
+
+// change timeRemaining to indicate how long to run the game
+var timeRemaining = 3; // seconds
 
 // create ascii duck
 const duckieArt = function(faceValue)
@@ -21,15 +23,24 @@ const setTime = function()
     let tInter = setInterval(
         () =>
         {
-            console.log(`time: ${timeRemaining / 10}`);
+            // log timer for debugging
+            console.log(`time: ${timeRemaining}`);
+
+            // update html to current time
+            timeCounter.innerHTML = `${timeRemaining} seconds remaining`;
             timeRemaining--;
             if (timeRemaining < 0)
             {
                 clearInterval(tInter);
                 console.log('zing, timer is up!');
             }
-        }, 100
+        }, 1000
     )
+}
+
+const setAnsw = function(answerArray)
+{
+
 }
 
 // eventListener to begin quiz game 
@@ -39,4 +50,5 @@ const setTime = function()
 
 // })
 
+// runtime invocation
 setTime();
