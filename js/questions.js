@@ -4,7 +4,7 @@
 const timeCounter = document.getElementById('timer');
 
 // change timeRemaining to indicate how long to run the game
-var timeRemaining = 3; // seconds
+// var timeRemaining = 3; // seconds
 
 // create ascii duck
 const duckieArt = function(faceValue)
@@ -16,16 +16,32 @@ const duckieArt = function(faceValue)
 
 console.log(duckieArt('^') + '  quack quack quack quack quack');
 
-// time countdown
+// stretch goal: fix OPFS interactions with web workers to enable
+// storing questions as JSON files, rather than a js object
 
-const loadJson = function(path) 
-{
-    const fs = new FileReader();
-    const jsonOut = fs.readAsText(path);
-    return JSON.parse(jsonOut);
-}
+// const getFi = async function(path)
+// {
+//     const worker = new Worker('./questions.js');
+//     const root = await navigator.storage.getDirectory();
+//     console.log(`root: ${root}]`);
 
-const setTime = function()
+//     // const handle = await root.getFileHandle(path, { create: false });
+//     // const access = await handle.createSyncAccessHandle();
+//     const fsize = await root.getFileHandle(path, { create: false });
+//                             // .createSyncAccessHandle()
+//                             // .getSize();
+// }
+// // time countdown
+
+// // const loadJson = function(path) 
+// {
+//     const fs = new FileReader();
+//     const jsonOut = fs.readAsText(path);
+//     return JSON.parse(jsonOut);
+// }
+
+// set time countdown
+const setTime = function(timeRemaining)
 {
     let tInter = setInterval(
         () =>
@@ -46,7 +62,7 @@ const setTime = function()
 }
 
 // get random integer value from 0 to n
-const getRand = function(n = 2)
+const getRand = function(n = 3)
 {
     return Math.floor(Math.random() * n);
 }
@@ -54,12 +70,25 @@ const getRand = function(n = 2)
 const setAnsw = function(answerObj)
 {
     console.log(`subject: ${answerObj.subject}`);
+
     const questions = answerObj.bank;
-    const answerSpace = document.getElementsByClassName('answer-slot');
+    const answerSlot = document.getElementsByClassName('answer-slot');
+
+    // debugging
+    console.log(`answer slots found: ${[...answerSlot]}`);
+
     let lotoQ = questions[getRand(questions.length)];
-    for (let i = 0; i < questions.length; i++)
+
+    // debugging output to show question & answer selected
+    console.log(
+        `lottory question output: ${lotoQ.question}
+    correct answer: ${lotoQ.options[lotoQ.correctIndex]}`);
+
+    // answerSlot[0].childNodes[0].textContent = lotoQ.options[0];
+    for (let i = 0; i < lotoQ.options.length; i++)
     {
-        answerSpace.children[i].innerHTML = lotoQ.options[i];
+        // @TODO: option text for the first one displays before the [1]
+        answerSlot[i].childNodes[i].textContent = lotoQ.options[i];
     }
 }
 
@@ -71,7 +100,11 @@ const setAnsw = function(answerObj)
 // })
 
 // runtime invocation
-const testBank = loadJson('../question_bank.test.json');
+// const testBank = loadJson('../question_bank.test.json');
 
-setTime();
-setAnsw(testBank);
+// getFi();
+window.addEventListener("load", () =>
+{
+    setTime(3);
+    setAnsw(testQuestions);
+});
