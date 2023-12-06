@@ -18,6 +18,13 @@ console.log(duckieArt('^') + '  quack quack quack quack quack');
 
 // time countdown
 
+const loadJson = function(path) 
+{
+    const fs = new FileReader();
+    const jsonOut = fs.readAsText(path);
+    return JSON.parse(jsonOut);
+}
+
 const setTime = function()
 {
     let tInter = setInterval(
@@ -64,5 +71,7 @@ const setAnsw = function(answerObj)
 // })
 
 // runtime invocation
+const testBank = loadJson('../question_bank.test.json');
+
 setTime();
-setAnsw('http://localhost/question_bank/test.json');
+setAnsw(testBank);
