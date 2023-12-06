@@ -46,6 +46,8 @@ const getRand = function(n = 2)
 
 const setAnsw = function(answerObj)
 {
+    console.log(`subject: ${answerObj.subject}`);
+    const questions = answerObj.bank;
     const answerSpace = document.getElementsByClassName('answer-slot');
     let lotoQ = questions[getRand(questions.length)];
     for (let i = 0; i < questions.length; i++)
@@ -63,3 +65,4 @@ const setAnsw = function(answerObj)
 
 // runtime invocation
 setTime();
+setAnsw('http://localhost/question_bank/test.json');
