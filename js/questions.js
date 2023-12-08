@@ -41,23 +41,27 @@ console.log(duckieArt('^') + '  quack quack quack quack quack');
 // }
 
 // set time countdown
-const setTime = function(timeRemaining)
+const setTime = function(timeRemaining, callback)
 {
     let tInter = setInterval(
         () =>
         {
+            console.log('callback function invoked'); // debugging
+            callback;
             // log timer for debugging
-            console.log(`time: ${timeRemaining}`);
+            console.log(`time: ${timeRemaining / 10}`);
+
+            // note: can floor the time if we do not want to show decimals
 
             // update html to current time
-            timeCounter.innerHTML = `${timeRemaining} seconds remaining`;
+            timeCounter.innerHTML = `${timeRemaining / 10} seconds remaining`;
             timeRemaining--;
             if (timeRemaining < 0)
             {
                 clearInterval(tInter);
                 console.log('zing, timer is up!');
             }
-        }, 1000
+        }, 100
     )
 }
 
@@ -103,23 +107,68 @@ const setAnsw = function(answerObj)
 
 // runtime invocation
 // const testBank = loadJson('../question_bank.test.json');
-const selectOptionKeyboard = function()
+// const selectOptionKeyboard = function()
+// {
+//     let keyPress = window.addEventListener('keydown', (event =>
+//     {
+//         // debugging
+//         console.log(`key pressed: ${event.key}`);
+//         return event.key;
+//     }));
+//     if (typeof keyPress === 'number')
+//     {
+//         document.getElementById(`key-${keyPress}`)
+//                 .style.outline = 'var(--selection-lm)';
+//     }
+//     return keyPress;
+// }
+// @TODO: add keyboard functionality
+// const setQuizKb = function()
+// {
+    
+//     window
+//     .addEventListener("keydown", (event) =>
+//     {
+//         if (event.key == '1')
+//         {
+//             window.getElementById('key-1')
+//             .firstChild.focus();
+//             // debugging message
+//             console.log('button 1 is focused');
+//         }
+//     });
+// }
+
+const quizGame = function(qBanksObj)
 {
-    let keyPress = window.addEventListener('keydown', (event =>
-    {
-        // debugging
-        console.log(`key pressed: ${event.key}`);
-        return event.key;
-    }));
-    if (typeof keyPress === 'number')
-    {
-        document.getElementById(`key-${keyPress}`);
-    }
+    let progressCounter = 0;
+    
+    // setQuizKb();
+    // window.addEventListener('keydown', (event =>
+    //     {
+    //         // debugging
+    //         console.log(`key pressed: ${event.key}`);
+    //         // if (typeof event.key === 'number')
+    //         // {
+    //         // document.getElementById(`key-${keyPress}`)
+    //         //         .style.outline = 'var(--selection-lm) solid 2px';
+    //         // }
+    //     }));
+
+    setTime(30, setAnsw(testQuestions));
+    // let userKeyIn = selectOptionKeyboard();
+    
+    // document.getElementById('start-btn')
+    //     .style.outline = 'var(--select-lm) solid 2px';
+    
 }
 
 // getFi();
 window.addEventListener("load", () =>
 {
-    setTime(3);
-    setAnsw(testQuestions);
+    quizGame([0,1,2,3,4]);
+    // window.getElementById('start-btn').addEventListener('click', () =>
+    // {
+    //     quizGame();
+    // })
 });
