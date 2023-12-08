@@ -14,8 +14,6 @@ const duckieArt = function(faceValue)
 /____)`
 } 
 
-console.log(duckieArt('^') + '  quack quack quack quack quack');
-
 // stretch goal: fix OPFS interactions with web workers to enable
 // storing questions as JSON files, rather than a js object
 
@@ -41,13 +39,14 @@ console.log(duckieArt('^') + '  quack quack quack quack quack');
 // }
 
 // set time countdown
-const setTime = function(timeRemaining, callback)
+const setTime = function(timeRemaining)
 {
     let tInter = setInterval(
         () =>
         {
-            console.log('callback function invoked'); // debugging
-            callback;
+            let currentIndex = 0;
+            // console.log('callback function invoked'); // debugging
+            // callback;
             // log timer for debugging
             console.log(`time: ${timeRemaining / 10}`);
 
@@ -55,12 +54,18 @@ const setTime = function(timeRemaining, callback)
 
             // update html to current time
             timeCounter.innerHTML = `${timeRemaining / 10} seconds remaining`;
+            quizGame(testQuestions.bank, currentIndex);
             timeRemaining--;
-            if (timeRemaining < 0)
+            // if (timeRemaining < 0)
+            // {
+            
+            console.log('popping out of invokation');
+            if (timeRemaining <= 0 || currentIndex >= testQuestions.bank.length)
             {
                 clearInterval(tInter);
-                console.log('zing, timer is up!');
             }
+            
+            // }
         }, 100
     )
 }
@@ -73,30 +78,37 @@ const getRand = function(n = 3)
 
 const setAnsw = function(answerObj)
 {
-    console.log(`subject: ${answerObj.subject}`);
+    // console.log(`subject: ${answerObj.subject}`);
 
-    const questions = answerObj.bank;
+    // const questions = answerObj.bank;
     const answerSlot = document.getElementsByClassName('answer-slot');
     const questionSlot = document.getElementById('question-text');
 
     // debugging
     console.log(`answer slots found: ${[...answerSlot]}`);
 
-    let lotoQ = questions[getRand(questions.length)];
+    // let lotoQ = questions[getRand(questions.length)];
 
     // debugging output to show question & answer selected
-    console.log(
-        `lottory question output: ${lotoQ.question}
-    correct answer: ${lotoQ.options[lotoQ.correctIndex]}`);
-    questionSlot.textContent = lotoQ.question;
+    // console.log(
+    //     `lottory question output: ${lotoQ.question}
+    // correct answer: ${lotoQ.options[lotoQ.correctIndex]}`);
+    questionSlot.textContent = answerObj.question;
     // answerSlot[0].childNodes[0].textContent = lotoQ.options[0];
-    for (let i = 0; i < lotoQ.options.length; i++)
+    for (let i = 0; i < answerObj.options.length; i++)
     {
         // @TODO: option text for the first one displays before the [1]
         const currSlot = answerSlot[i].childNodes[i];
-        currSlot.textContent = lotoQ.options[i];
+        currSlot.textContent = answerObj.options[i];
     }
 }
+
+// add onclick functionality
+
+const optionOnClick = function(correctString)
+{
+    return this.textContent === correctString;
+} // end optionOnClick
 
 // eventListener to begin quiz game 
 // 
@@ -139,10 +151,27 @@ const setAnsw = function(answerObj)
 //     });
 // }
 
-const quizGame = function(qBanksObj)
-{
-    let progressCounter = 0;
+const quizGame = function(qBanksObj, index)
+{   
+    // time = setTime(time);
+    let i = qBanksObj[index].options.correctIndex;
     
+    let currAnsw = qBanksObj[index].options[i];
+
+    setAnsw(qBanksObj[index]);
+
+    document.getElementById('02-option')
+    .onclick = function(currAnsw)
+    {
+        if (optionOnClick(currAnsw))
+        {
+            uPoints.score++;
+            console.log(`points = ${uPoints.score}`)
+        }
+        index++;
+    };
+    console.log('finished iteration of quizGame loop');
+    return index;
     // setQuizKb();
     // window.addEventListener('keydown', (event =>
     //     {
@@ -155,7 +184,7 @@ const quizGame = function(qBanksObj)
     //         // }
     //     }));
 
-    setTime(30, setAnsw(testQuestions));
+    // setTime(time, setAnsw(testQuestions));
     // let userKeyIn = selectOptionKeyboard();
     
     // document.getElementById('start-btn')
@@ -166,9 +195,19 @@ const quizGame = function(qBanksObj)
 // getFi();
 window.addEventListener("load", () =>
 {
-    quizGame([0,1,2,3,4]);
+    let globalTime = 30;
+    let uPoints = {
+        "score":0,
+        "username":""
+    };
+    
+    console.log(duckieArt('^') + '  quack quack quack quack quack');
+    // quizGame(testQuestions.bank);
+    setTime(globalTime);
     // window.getElementById('start-btn').addEventListener('click', () =>
     // {
     //     quizGame();
     // })
 });
+
+console.log('exiting successfully');
