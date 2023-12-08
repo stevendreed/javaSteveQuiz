@@ -18,6 +18,7 @@
     --nav-text-dm: #D9D9D9;
     --nav-btn-dm: #1E0701;
     --nav-bg-dm: #4A3E3B;
+    --selection-lm: var(--nav-btn-lm);
 }
 /****************************** END vars ******************************/
 

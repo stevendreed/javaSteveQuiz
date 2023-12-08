@@ -14,8 +14,6 @@ const duckieArt = function(faceValue)
 /____)`
 } 
 
-console.log(duckieArt('^') + '  quack quack quack quack quack');
-
 // stretch goal: fix OPFS interactions with web workers to enable
 // storing questions as JSON files, rather than a js object
 
@@ -46,18 +44,29 @@ const setTime = function(timeRemaining)
     let tInter = setInterval(
         () =>
         {
+            let currentIndex = 0;
+            // console.log('callback function invoked'); // debugging
+            // callback;
             // log timer for debugging
-            console.log(`time: ${timeRemaining}`);
+            console.log(`time: ${timeRemaining / 10}`);
+
+            // note: can floor the time if we do not want to show decimals
 
             // update html to current time
-            timeCounter.innerHTML = `${timeRemaining} seconds remaining`;
+            timeCounter.innerHTML = `${timeRemaining / 10} seconds remaining`;
+            quizGame(testQuestions.bank, currentIndex);
             timeRemaining--;
-            if (timeRemaining < 0)
+            // if (timeRemaining < 0)
+            // {
+            
+            console.log('popping out of invokation');
+            if (timeRemaining <= 0 || currentIndex >= testQuestions.bank.length)
             {
                 clearInterval(tInter);
-                console.log('zing, timer is up!');
             }
-        }, 1000
+            
+            // }
+        }, 100
     )
 }
 
@@ -69,29 +78,37 @@ const getRand = function(n = 3)
 
 const setAnsw = function(answerObj)
 {
-    console.log(`subject: ${answerObj.subject}`);
+    // console.log(`subject: ${answerObj.subject}`);
 
-    const questions = answerObj.bank;
+    // const questions = answerObj.bank;
     const answerSlot = document.getElementsByClassName('answer-slot');
     const questionSlot = document.getElementById('question-text');
 
     // debugging
     console.log(`answer slots found: ${[...answerSlot]}`);
 
-    let lotoQ = questions[getRand(questions.length)];
+    // let lotoQ = questions[getRand(questions.length)];
 
     // debugging output to show question & answer selected
-    console.log(
-        `lottory question output: ${lotoQ.question}
-    correct answer: ${lotoQ.options[lotoQ.correctIndex]}`);
-    questionSlot.textContent = lotoQ.question;
+    // console.log(
+    //     `lottory question output: ${lotoQ.question}
+    // correct answer: ${lotoQ.options[lotoQ.correctIndex]}`);
+    questionSlot.textContent = answerObj.question;
     // answerSlot[0].childNodes[0].textContent = lotoQ.options[0];
-    for (let i = 0; i < lotoQ.options.length; i++)
+    for (let i = 0; i < answerObj.options.length; i++)
     {
         // @TODO: option text for the first one displays before the [1]
-        answerSlot[i].childNodes[i].textContent = lotoQ.options[i];
+        const currSlot = answerSlot[i].childNodes[i];
+        currSlot.textContent = answerObj.options[i];
     }
 }
+
+// add onclick functionality
+
+const optionOnClick = function(correctString)
+{
+    return this.textContent === correctString;
+} // end optionOnClick
 
 // eventListener to begin quiz game 
 // 
@@ -102,10 +119,95 @@ const setAnsw = function(answerObj)
 
 // runtime invocation
 // const testBank = loadJson('../question_bank.test.json');
+// const selectOptionKeyboard = function()
+// {
+//     let keyPress = window.addEventListener('keydown', (event =>
+//     {
+//         // debugging
+//         console.log(`key pressed: ${event.key}`);
+//         return event.key;
+//     }));
+//     if (typeof keyPress === 'number')
+//     {
+//         document.getElementById(`key-${keyPress}`)
+//                 .style.outline = 'var(--selection-lm)';
+//     }
+//     return keyPress;
+// }
+// @TODO: add keyboard functionality
+// const setQuizKb = function()
+// {
+    
+//     window
+//     .addEventListener("keydown", (event) =>
+//     {
+//         if (event.key == '1')
+//         {
+//             window.getElementById('key-1')
+//             .firstChild.focus();
+//             // debugging message
+//             console.log('button 1 is focused');
+//         }
+//     });
+// }
+
+const quizGame = function(qBanksObj, index)
+{   
+    // time = setTime(time);
+    let i = qBanksObj[index].options.correctIndex;
+    
+    let currAnsw = qBanksObj[index].options[i];
+
+    setAnsw(qBanksObj[index]);
+
+    document.getElementById('02-option')
+    .onclick = function(currAnsw)
+    {
+        if (optionOnClick(currAnsw))
+        {
+            uPoints.score++;
+            console.log(`points = ${uPoints.score}`)
+        }
+        index++;
+    };
+    console.log('finished iteration of quizGame loop');
+    return index;
+    // setQuizKb();
+    // window.addEventListener('keydown', (event =>
+    //     {
+    //         // debugging
+    //         console.log(`key pressed: ${event.key}`);
+    //         // if (typeof event.key === 'number')
+    //         // {
+    //         // document.getElementById(`key-${keyPress}`)
+    //         //         .style.outline = 'var(--selection-lm) solid 2px';
+    //         // }
+    //     }));
+
+    // setTime(time, setAnsw(testQuestions));
+    // let userKeyIn = selectOptionKeyboard();
+    
+    // document.getElementById('start-btn')
+    //     .style.outline = 'var(--select-lm) solid 2px';
+    
+}
 
 // getFi();
 window.addEventListener("load", () =>
 {
-    setTime(3);
-    setAnsw(testQuestions);
+    let globalTime = 30;
+    let uPoints = {
+        "score":0,
+        "username":""
+    };
+    
+    console.log(duckieArt('^') + '  quack quack quack quack quack');
+    // quizGame(testQuestions.bank);
+    setTime(globalTime);
+    // window.getElementById('start-btn').addEventListener('click', () =>
+    // {
+    //     quizGame();
+    // })
 });
+
+console.log('exiting successfully');
